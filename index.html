@@ -63,6 +63,23 @@ function manageData(key){
   var name=$("#countryName");
   var shortDesc=$("#shortDesc");
   var longDesc=$("#longDesc");
+
+  if(name.val()!=''&& shortDesc.val()!='' && longDesc.val()!=''){
+      $.ajax({
+          url: 'ajax.php',
+          method: 'POST',
+          dataType: 'text',
+          data:{
+              key:key,
+              name: name.val(),
+              shortDesc: shortDesc.val(),
+              longDesc: longDesc.val()
+
+          }, success: function(response){
+              alert(response);
+          }
+      })
+  }
  if(name.val()==''){
     name.css('border', '1px solid red');
     return;}

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+   
+    <title>Pozorište</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="custom-font/fonts.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/bootsnav.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.fancybox.css?v=2.1.5" media="screen" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="css/custom.css" />
+
+    <style>
+        h2 {
+            color: rgb(11, 126, 67);
+        }
+        
+        p {
+            color: beige;
+        }
+    </style>
+</head>
+
+<body style="background-image: url(image/slika1.jpg)">
+    <header>
+        <nav  style="background-color:rgb(11, 126, 67)">
+            <div class="container1">
+           
+                <div >
+                    <ul >
+                        
+                        <li><a href="#izmena">Izmeni rezervaciju</a></li>
+                        <li><a href="#pretragaisortiranje">Pronađi rezervaciju</a></li>
+                        <style>
+
+                        </style>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container" style="margin-top: 30px;">
+        <div id="tableManager" class="modal fade">
+            <div class="modal-dialog">
+              <div class="modal-content"> 
+                <div class="modal-header">
+                    <h2 class="modal-title">Country name</h2>
+
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control" placeholder="Klijent" id="klijent">
+                    <br>
+                    <input type="text" class="form-control" id="datum" placeholder="Datum"><br>
+                    <input type="text" class="form-control" id="cena" placeholder="Cena"><br>
+                    <select class="form-control" id="usluga" placeholder="Usluga">
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" value="Save" class="btn btn-success" onclick="dodajRezervaciju()">
+                    
+                </div>
+            </div> 
+            </div>
+        </div>
+        <div class="row">
+           <div class="col-md-8 col-md-offser-2">
+               <h2>Rezervacija</h2>
+
+               <input style="float: right" type="button" class="btn btn-success" id="addNew" value="Add New">
+           <br></br>
+           
+               <table class="table table-hover table-bordered">
+               <thead>
+                   <tr>
+                       <td>Ime klijenta</td>
+                       <td>Datum</td>
+                       <td>Usluga</td>
+                       <td>Cena</td>
+                   </tr>
+               </thead>
+           </table>
+            </div> 
+        </div>
+    </div>
+    <footer>
+        <div class="footer_bottom text-center" style="background-color: rgb(11, 126, 67);">
+            <p>Fotografski studio</p>
+        </div>
+    </footer>
+
+    
+    <script src="js/main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+        $("#addNew").on('click',function(){
+        $("#tableManager").modal('show');
+             });
+        });
+
+        function vratiKomboZanr() {
+            $.ajax({
+                url: 'vratiKombo.php',
+                success: function(data) {
+                    $("#usluga").html(data);
+                    //$("#pretraga").html(data);
+                   // pretrazi();
+                }
+            });
+        }
+        vratiKomboZanr();
+
+        function dodajRezervaciju() {
+            let podaci = {
+                klijent: $("#klijent").val(),
+                datum: $("#datum").val(),
+                usluga: $("#usluga").val(),
+                cena: $("#cena").val()
+            };
+
+            $.ajax({
+                url: 'dodajPredstavu.php',
+                type: 'POST',
+                data: podaci,
+                success: function(data) {
+                    $("#odgovorUnos").html(data);
+                   // pretrazi();
+                    vratiKomboZanr();
+                }
+            });
+        }
+</script>
+
+</body>
+</html>
+
