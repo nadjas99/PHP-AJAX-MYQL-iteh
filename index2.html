@@ -138,7 +138,7 @@
              });
         });
 
-        function vratiKomboZanr() {
+        function vratiKomboUsluga() {
             $.ajax({
                 url: 'vratiKombo.php',
                 success: function(data) {
@@ -148,7 +148,7 @@
                 }
             });
         }
-        vratiKomboZanr();
+        vratiKomboUsluga();
         function komboRezervacija(){
             $.ajax({
                 url: 'komboRezervacije.php',
@@ -174,7 +174,7 @@
                 success: function(data) {
                     $("#odgovorUnos").html(data);
                    // pretrazi();
-                    vratiKomboZanr();
+                    vratiKomboUsluga();
                 }
             });
         }

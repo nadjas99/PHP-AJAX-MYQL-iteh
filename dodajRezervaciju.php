@@ -14,7 +14,7 @@ if($sacuvano){
     echo '<script>console.log("Saved")</script>';
     ?>
     <div class="alert alert-success" role="alert">
-        Uspešno dodata predstava!
+        Uspešno dodata rezervacija!
         
     </div>
 <?php
@@ -22,7 +22,7 @@ if($sacuvano){
     echo '<script>console.log("Nije sacuvano")</script>';
     ?>
     <div class="alert alert-danger" role="alert">
-        Neuspešno dodata predstava!
+        Neuspešno dodata rezervacija!
     </div>
 <?php
 }
