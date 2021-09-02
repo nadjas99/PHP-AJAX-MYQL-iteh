@@ -40,25 +40,25 @@ class DBBroker
         return $predstave;
     }
 
-    public function obrisiPredstavu($id)
+    public function obrisiRezervaciju($id)
     {
-        return $this->mysqli->query("DELETE FROM predstava WHERE predstavaID = " . $id);
+        return $this->mysqli->query("DELETE FROM rezervacija WHERE id = '" . $id."'");
     }
 
-    public function vratiSvePredstave()
+    public function vratiSveRezervacije()
     {
-        $upit = "SELECT * FROM predstava p join zanr z on p.zanr = z.zanrID";
+        $upit = "SELECT * FROM rezervacija r join usluga u on r.idUsluga = u.uslugaID";
 
         $rs = $this->mysqli->query($upit);
-        $predstave = [];
+        $rezervacije = [];
         while ($red = $rs->fetch_object()) {
-            $predstave[] = new Predstava($red->predstavaID,$red->nazivPredstave,$red->komentar,new Zanr($red->zanrID,$red->nazivZanra),$red->cenaKarte);
+            $rezervacije[] = new Rezervacija($red->id,$red->Klijent,$red->Cena,new Usluga($red->uslugaID,$red->NazivUsluge),$red->Datum);
         }
-        return $predstave;
+        return $rezervacije;
     }
 
-    public function izmeniPredstavu($predstavaID, $komentar, $cenaKarte)
+    public function izmeniRezervaciju($rezervacijaID, $datum, $cena)
     {
-        return $this->mysqli->query("UPDATE predstava SET komentar = '" . $komentar .  "', cenaKarte = '" .$cenaKarte ."' WHERE predstavaID = '" . $predstavaID."'");
+        return $this->mysqli->query("UPDATE rezervacija SET datum = '" . $datum .  "', cena = '" .$cena ."' WHERE id = '" . $rezervacijaID."'");
     }
 }
